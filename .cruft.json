@@ -1,0 +1,19 @@
+{
+  "template": "https://github.com/ingenii-solutions/terraform-module-template.git",
+  "commit": "8201eaf10cbeb7b32d89effdf141c20f1d0a7428",
+  "checkout": null,
+  "context": {
+    "cookiecutter": {
+      "github_organization": "ingenii-solutions",
+      "provider_name": "databricks",
+      "module_name": "cluster",
+      "project_dir": "terraform-databricks-cluster",
+      "_copy_without_render": [
+        ".github/workflows/unit-tests.yml",
+        ".github/workflows/static-code-analysis.yml"
+      ],
+      "_template": "https://github.com/ingenii-solutions/terraform-module-template.git"
+    }
+  },
+  "directory": null
+}

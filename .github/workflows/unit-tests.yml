@@ -1,0 +1,39 @@
+name: "Unit Tests"
+
+on:
+  push:
+    branches:
+      - main # Running on the main branch would keep the Integration Tests status badge updated.
+  pull_request:
+
+env:
+  TERRAFORM_VERSION: 0.14.0
+  GO_VERSION: 1.16
+  ARM_CLIENT_ID: ${{ secrets.TESTING_CREDS_AZURE_ARM_CLIENT_ID }}
+  ARM_TENANT_ID: ${{ secrets.TESTING_CREDS_AZURE_ARM_TENANT_ID }}
+  ARM_SUBSCRIPTION_ID: ${{ secrets.TESTING_CREDS_AZURE_ARM_SUBSCRIPTION_ID }}
+  ARM_CLIENT_SECRET: ${{ secrets.TESTING_CREDS_AZURE_ARM_CLIENT_SECRET }}
+
+jobs:
+  test:
+    name: "Unit Tests"
+    runs-on: ubuntu-latest
+    steps:
+      # Pre Requisites
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v1
+        with:
+          terraform_wrapper: false # This is required for Terratest to run correctly.
+          terraform_version: ${{ env.TERRAFORM_VERSION }}
+
+      - name: Set up Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: ${{ env.GO_VERSION }}
+
+        # Run Unit Tests
+      - name: Unit Tests
+        run: make test-unit-test
