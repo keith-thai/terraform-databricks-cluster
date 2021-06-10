@@ -100,15 +100,15 @@ variable "cluster_runtime_version_type" {
   description = "The type of runtime version will be used by the cluster."
   default     = "latest"
   validation {
-    condition     = contains(["lts", "latest", "beta"], var.cluster_runtime_version_type)
-    error_message = "The version type can be one of: lts, latest and beta."
+    condition     = contains(["lts", "latest"], var.cluster_runtime_version_type)
+    error_message = "The version type can be one of: lts or latest."
   }
 }
 
 variable "cluster_runtime_spark_version" {
   type        = string
   description = "The specific Spark version that this cluster should run."
-  default     = ""
+  default     = "3"
 }
 
 variable "cluster_runtime_scala_version" {

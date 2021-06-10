@@ -174,7 +174,7 @@ module "high_concurrency_cluster" {
 | <a name="input_azure_data_lake_storage_credential_passthrough_is_enabled"></a> [azure\_data\_lake\_storage\_credential\_passthrough\_is\_enabled](#input\_azure\_data\_lake\_storage\_credential\_passthrough\_is\_enabled) | Controls wether AAD pass trough is enabled. | `bool` | `false` | no |
 | <a name="input_cluster_mode"></a> [cluster\_mode](#input\_cluster\_mode) | n/a | `string` | `"standard"` | no |
 | <a name="input_cluster_runtime_scala_version"></a> [cluster\_runtime\_scala\_version](#input\_cluster\_runtime\_scala\_version) | The specific Scala version that this cluster should run. | `string` | `""` | no |
-| <a name="input_cluster_runtime_spark_version"></a> [cluster\_runtime\_spark\_version](#input\_cluster\_runtime\_spark\_version) | The specific Spark version that this cluster should run. | `string` | `""` | no |
+| <a name="input_cluster_runtime_spark_version"></a> [cluster\_runtime\_spark\_version](#input\_cluster\_runtime\_spark\_version) | The specific Spark version that this cluster should run. | `string` | `"3"` | no |
 | <a name="input_cluster_runtime_version_only_genomics"></a> [cluster\_runtime\_version\_only\_genomics](#input\_cluster\_runtime\_version\_only\_genomics) | Limit the search for Genomics(HLS) runtimes only. | `bool` | `false` | no |
 | <a name="input_cluster_runtime_version_only_gpu"></a> [cluster\_runtime\_version\_only\_gpu](#input\_cluster\_runtime\_version\_only\_gpu) | Limit the search for runtimes that support GPUs. | `bool` | `false` | no |
 | <a name="input_cluster_runtime_version_only_ml"></a> [cluster\_runtime\_version\_only\_ml](#input\_cluster\_runtime\_version\_only\_ml) | Limit the search for ML runtimes only. | `bool` | `false` | no |

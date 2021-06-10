@@ -1,17 +1,10 @@
 ########################################################################################################################
 # Data Sources
 ########################################################################################################################
-data "databricks_spark_version" "latest" {
-  latest        = true
-  spark_version = var.cluster_runtime_spark_version
-  scala         = var.cluster_runtime_scala_version
-  ml            = var.cluster_runtime_version_only_ml
-  genomics      = var.cluster_runtime_version_only_genomics
-  gpu           = var.cluster_runtime_version_only_gpu
-}
-
-data "databricks_spark_version" "lts" {
-  long_term_support = true
+data "databricks_spark_version" "this" {
+  beta              = contains([var.cluster_runtime_version_type], "beta")
+  long_term_support = contains([var.cluster_runtime_version_type], "lts")
+  latest            = contains([var.cluster_runtime_version_type], "latest")
   spark_version     = var.cluster_runtime_spark_version
   scala             = var.cluster_runtime_scala_version
   ml                = var.cluster_runtime_version_only_ml
@@ -19,25 +12,10 @@ data "databricks_spark_version" "lts" {
   gpu               = var.cluster_runtime_version_only_gpu
 }
 
-data "databricks_spark_version" "beta" {
-  beta          = true
-  spark_version = var.cluster_runtime_spark_version
-  scala         = var.cluster_runtime_scala_version
-  ml            = var.cluster_runtime_version_only_ml
-  genomics      = var.cluster_runtime_version_only_genomics
-  gpu           = var.cluster_runtime_version_only_gpu
-}
-
 ########################################################################################################################
 # Local Values
 ########################################################################################################################
 locals {
-  spark_version_types = {
-    lts    = data.databricks_spark_version.lts
-    latest = data.databricks_spark_version.latest
-    beta   = data.databricks_spark_version.beta
-  }
-
   cluster_modes = {
     single_node = {
       spark_config = {
@@ -87,7 +65,7 @@ locals {
 ########################################################################################################################
 locals {
   current_cluster_config = {
-    spark_version  = local.spark_version_types[var.cluster_runtime_version_type].id
+    spark_version  = data.databricks_spark_version.this.id
     spark_config   = merge(local.cluster_modes[var.cluster_mode].spark_config, var.spark_config)
     spark_env_vars = merge(local.cluster_modes[var.cluster_mode].env_vars, var.spark_env_vars)
     tags = merge(local.cluster_modes[var.cluster_mode].tags,

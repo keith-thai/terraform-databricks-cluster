@@ -57,7 +57,7 @@ module "standard_cluster" {
   tags = local.tags
 
   cluster_mode                 = "standard"
-  cluster_runtime_version_type = "beta"
+  cluster_runtime_version_type = "lts"
 
   worker_node_type_id = "Standard_F4s"
   driver_node_type_id = "Standard_F4s"
