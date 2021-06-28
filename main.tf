@@ -81,6 +81,8 @@ locals {
       }
     ] : []
 
+    cluster_log_conf = len(var.dbfs_log_path) > 0 ? [concat("dbfs://", trim(var.dbfs_log_path, "/"))] : []
+
     init_scripts = {
       dbfs = [for script in var.init_scripts : script if script.type == "dbfs"]
       s3   = [for script in var.init_scripts : script if script.type == "s3"]
@@ -163,6 +165,16 @@ resource "databricks_cluster" "this" {
     content {
       min_workers = i.value.min_workers
       max_workers = i.value.max_workers
+    }
+  }
+
+  dynamic "cluster_log_conf" {
+    for_each = local.current_cluster_config.cluster_log_conf
+    iterator = i
+    content {
+      dbfs {
+        destination = i
+      }
     }
   }
 

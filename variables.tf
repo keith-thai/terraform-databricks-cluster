@@ -41,6 +41,12 @@ variable "cluster_mode" {
   default = "standard"
 }
 
+variable "dbfs_log_path" {
+  type = string
+  description = "The path in the DBFS that cluster logs will be written to"
+  default = "cluster-logs"
+}
+
 variable "number_of_workers" {
   type        = number
   description = "The number of workers, if the cluster is going to be of a fixed size."
