@@ -81,7 +81,7 @@ locals {
       }
     ] : []
 
-    cluster_log_conf = len(var.dbfs_log_path) > 0 ? [concat("dbfs://", trim(var.dbfs_log_path, "/"))] : []
+    cluster_log_conf = length(var.dbfs_log_path) > 0 ? [concat("dbfs://", trim(var.dbfs_log_path, "/"))] : []
 
     init_scripts = {
       dbfs = [for script in var.init_scripts : script if script.type == "dbfs"]

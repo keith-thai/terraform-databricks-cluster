@@ -42,9 +42,9 @@ variable "cluster_mode" {
 }
 
 variable "dbfs_log_path" {
-  type = string
+  type        = string
   description = "The path in the DBFS that cluster logs will be written to"
-  default = "cluster-logs"
+  default     = "cluster-logs"
 }
 
 variable "number_of_workers" {
